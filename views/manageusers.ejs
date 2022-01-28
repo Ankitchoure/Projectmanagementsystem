@@ -1,0 +1,58 @@
+<% include adminheader %>
+
+
+
+
+            <!-- About Start -->
+            <div class="about wow fadeInUp" data-wow-delay="0.1s">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="section-header text-left">  
+                                <center>
+                                    <h1>Views & Manage Users</h1>
+                                    <br>
+                                    <table class = "table table-bordered">
+                                 <tr>
+                          <th>RegId</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Mobile</th>
+                          <th>Address</th>
+                          <th>City</th>
+                          <th>Gender</th>
+                          <th>Info</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
+                    <!----    <tr><td colspan="8"><hr></td></tr>-->
+                        <% for(let row of result) { %>
+                            <tr>
+           <td><%= row._id %></td>
+                            <td><%= row.Name %></td>
+                            <td><%= row.email %></td>
+                            <td><%= row.mobile %></td>
+                            <td><%= row.address %></td>
+                            <td><%= row.city %></td>
+                            <td><%= row.gender %></td>
+                            <td><%= row.info %></td>
+                                      <td>
+                                <% if(row.status){ %>
+                          <a title = "Block User" href="/admin/manageuserstatus?regid= <%= row._id %>&s=block"><img src="../img/block.png" height ="50" width = "50"/></a>
+                        <% }  else {  %>
+                            <a title = "Verify User" href="/admin/manageuserstatus?regid= <%= row._id %>&s=verify"><img src="../img/unblock.jpeg" height ="50" width = "50"/></a>     
+                            <%  } %></td>
+                            <td><a title = "Delete User" href="/admin/manageuserstatus?regid= <%= row._id %>&s=delete"><img src="../img/delete.png" height ="50" width = "50"/></td>
+                            </tr>
+                         <!----    <tr><td colspan="8"><hr></td></tr>-->
+                            <% } %>
+                             </table>
+                            </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- About End -->
+
+        <% include adminfooter %>

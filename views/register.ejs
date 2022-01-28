@@ -1,0 +1,92 @@
+<% include header %>
+
+<script>
+
+function checkEmail(emailid)
+{
+
+  var xhttp = new XMLHttpRequest()
+  xhttp.open("GET","http://localhost:3000/checkEmail?emailid="+emailid,true)
+  xhttp.send()
+
+  xhttp.onreadystatechange=function()
+  {
+if(xhttp.status==200 && xhttp.readyState==4)
+{
+  //use to convert string formatted java script object to pure java script object
+  var s = JSON.parse(xhttp.responseText)
+  //document.getElementById("response").innerHTML=s.matchstatus
+var ref = document.getElementById("response")
+if(s.matchstatus)
+{
+ref.innerHTML="EmailID already exists,please try with new"
+ref.style.color="red"
+}
+else
+{
+ref.innerHTML="EmailID available, proceed further"
+ref.style.color="green"
+}
+}
+
+
+  }
+//document.getElementById("response").innerHTML=emailid
+//alert(emailid)
+}
+
+</script>
+
+            <!-- About Start -->
+            <div class="about wow fadeInUp" data-wow-delay="0.1s">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="section-header text-left">
+                                <h1>Register Here</h1>
+                                <font color="blue"><%= output %></font>
+                                <form method="post" action="/register">
+                                    <div class="form-group">
+                                        <label>Name</label><br>
+                                        <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" name="Name"><br>
+                                      <label for="exampleInputusername">Username</label>
+                                      <input onkeyup="checkEmail(this.value)" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                                     <span id = "response"></span>
+                                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="exampleInputPassword1">Password</label>
+                                      <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                                      <label for="exampleInputPassword1">Mobile number</label>
+                                      <input type="text" class="form-control" id="exampleInputPassword1" name="mobile">
+                                    </div>
+                                    <div class="form-group">
+                                    <label>Address</label>
+                                    <textarea row="5" class="form-control" id="exampleInputPassword1" name="address"></textarea>
+                                  </div>
+                                 <div class="form-group">
+                                    <label>City</label>
+                                    <select class="form-control" id="exampleInputPassword1" name="city">
+                                    <option>Select City</option>
+                                    <option>Bhopal</option>
+                                    <option>Indore</option>
+                                    <option>Ujjain</option>
+                                  </select>
+                               </div>
+                                    <div class="form-group form-check">
+                                  <label>Gender</label>
+                                  Male <input type ="radio" name = "gender" value="male">
+                                  &nbsp;&nbsp;
+                                  Female <input type ="radio" name = "gender" value="female">
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                  </form>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- About End -->
+
+        <% include footer %>
